@@ -1,46 +1,58 @@
 # Dropletee
 
-**GPU-powered water simulation plugin for After Effects**
+**Liquid distortion effect for After Effects, powered by WebGPU**
 
 [![Buy on aescripts](https://img.shields.io/badge/Buy%20on-aescripts.com-blue)](https://aescripts.com/dropletee/)
 
 ---
 
-## Compatibility
+## What is Dropletee?
+
+Dropletee is a GPU-accelerated plugin that turns any layer into flowing liquid. It accumulates frames over time, pushing pixels along surface normals with iridescent color palettes and specular lighting.
+
+Key features:
+- **Frame accumulation** with temporal distortion, noise, and wind
+- **Self-distortion** that builds a normal map and pushes pixels along it, creating a fluid look
+- **Stylization** with cosine palettes, surface normals, and lighting
+- **Real-time GPU rendering** via WebGPU (Metal on macOS)
+- **Auto Cache** for seamless timeline scrubbing
+- **Multi-Frame Rendering** support
+- 6 presets included: Chemtrails, Blue Acid, Dust Devil, Oil Slick, Wave Rush, Soap Burst
+
+---
+
+## How it works
+
+Dropletee is a time-dependent effect - each frame is built from all the previous ones. Parameters are split into two categories:
+
+- **Simulation** - frame accumulation, distortion, noise, wind. Changes require re-caching
+- **Stylization** - surface normals, palette, lighting. Applied on top of cached results, updates instantly
+
+### Caching modes
+
+Since the simulation is sequential, there are three caching modes:
+
+1. **Live Preview** - quick feedback for tweaking simulation parameters. Set the number of preview frames; fewer frames means faster response
+2. **Compute** - manual caching from the layer's in-point to the current time, with a progress bar shown in the frame
+3. **Auto Cache** (recommended) - blocks the current frame until the entire sequence up to that point is computed. Once done, scrub freely
+
+---
+
+## System requirements
 
 | Platform | Status |
 |----------|--------|
 | macOS 10.15+ (Intel & Apple Silicon) | Available |
 | Windows 10+ | Available |
 
-**After Effects**: 2022 and later
-
----
-
-## What is Dropletee?
-
-Dropletee is a real-time water simulation effect for After Effects, powered entirely by WebGPU. Apply it to any layer and watch as a fluid simulation interacts with the layer's alpha channel, creating realistic water drips, splashes, and flows.
-
-Key features:
-- **Real-time GPU simulation** via WebGPU (Metal on macOS)
-- **Multi-Frame Rendering** support
-- **Auto Cache** mode for seamless timeline scrubbing
-- **Batch Compute** for pre-caching sequences
-
----
-
-## System Requirements
-
-- **macOS** 10.15+ (Intel & Apple Silicon)
-- **Windows** 10+
-- **After Effects** 2022+
+- **After Effects** 2022 and later
 - GPU with WebGPU support (Metal on macOS)
 
 ---
 
 ## Support
 
-### Reporting Issues
+### Reporting issues
 
 This repository is for **bug reports** and **feature requests**. Please use the issue templates provided.
 
@@ -50,7 +62,7 @@ Before creating an issue:
 - Provide steps to reproduce bugs
 - Attach screenshots or videos if possible
 
-### Purchase & Licensing
+### Purchase & licensing
 
 For purchase and licensing questions, please contact [aescripts support](https://aescripts.com/contact/).
 
@@ -58,7 +70,7 @@ For purchase and licensing questions, please contact [aescripts support](https:/
 
 ## Privacy
 
-Dropletee collects anonymous usage analytics to improve stability and quality. See our full [Privacy Policy](PRIVACY.md).
+Dropletee collects anonymous crash reports and usage statistics to improve stability. No personal files or project data is accessed. See our full [Privacy Policy](PRIVACY.md).
 
 ---
 
